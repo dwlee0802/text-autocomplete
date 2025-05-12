@@ -12,3 +12,29 @@
 .autocomplete-dropdown li:hover {
     background-color: var(--background-modifier-hover);
 }
+
+.custom-word-scroll {
+    max-height: 200px;
+    overflow-y: auto;
+    padding-left: 10px;
+    padding-right: 15px;
+}
+
+.custom-word-scroll::-webkit-scrollbar {
+    background-color: transparent;
+	width: 5px;
+}
+
+.custom-word-scroll.show::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.5);
+    border-radius: 5px;
+}
+
+.custom-word-scroll:not(.show)::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+.custom-word-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}

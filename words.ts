@@ -4,7 +4,7 @@ const DEFAULT_WORDS : string[] = [
     "and",
     "to",
     "in",
-    "i",
+    "I",
     "that",
     "was",
     "his",

@@ -36,7 +36,7 @@ export class TASettingsTab extends PluginSettingTab {
         // Autocomplete setting
         new Setting(containerEl)
             .setName('Autocomplete')
-            .setDesc('Enable/disable autocomplete feature.')
+            .setDesc('Enable/disable the autocomplete feature.')
             .addToggle(toggle =>
                 toggle.setValue(this.plugin.settings.enabled)
                     .onChange(async val => {
@@ -47,7 +47,7 @@ export class TASettingsTab extends PluginSettingTab {
         // Language setting
         new Setting(containerEl)
             .setName('Language')
-            .setDesc('Specify text language support.')
+            .setDesc('Specify text language support (only English is supported at the moment).')
             .addDropdown(dropdown =>
                 dropdown.addOption('English', 'English')
                     .setValue(this.plugin.settings.language)
@@ -77,7 +77,7 @@ export class TASettingsTab extends PluginSettingTab {
                 text.setPlaceholder('e.g. tiktok');
                 text.inputEl.addEventListener('keydown', async (e) => {
                     if (e.key === 'Enter') {
-                        const word = text.getValue().trim().toLowerCase();
+                        const word = text.getValue().trim();
                         if (word && !this.plugin.settings.customDict.includes(word)) {
                             this.plugin.settings.customDict.push(word);
                             this.plugin.wordTrie.insert(word);
@@ -91,8 +91,15 @@ export class TASettingsTab extends PluginSettingTab {
 
         // Manage custom dictionary subsetting
         if (this.plugin.settings.customDict.length > 0) {
-            // containerEl.createEl('h3', { text: 'Custom Dictionary Contents' });
             const scrollContainer = containerEl.createDiv({ cls: 'custom-word-scroll' });
+
+            scrollContainer.addEventListener('scroll', () => {
+                scrollContainer.classList.add('show');
+                clearTimeout((scrollContainer as any).scrollTimeout);
+                (scrollContainer as any).scrollTimeout = setTimeout(() => {
+                    scrollContainer.classList.remove('show');
+                }, 1000);
+            });
             
             this.plugin.settings.customDict.forEach((word, index) => {
                 const row = new Setting(scrollContainer)

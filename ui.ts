@@ -30,7 +30,7 @@ export function updateSuggestions(suggestions: string[], editor: Editor, baseWor
             const cursor = editor.getCursor();
             const line = editor.getLine(cursor.line);
             const beforeCursor = line.substring(0, cursor.ch);
-            const match = beforeCursor.match(/(\b\w+)$/);
+            const match = beforeCursor.match(/(\b[\w']+)$/);
             if (match) {
                 editor.replaceRange(
                     suggestion, 
@@ -49,7 +49,7 @@ export function updateSuggestions(suggestions: string[], editor: Editor, baseWor
         position: 'absolute',
         top: `${coords.bottom + window.scrollY}px`,
         left: `${coords.left + window.scrollX}px`,
-        zIndex: 1000,
+        zIndex: 50,
         backgroundColor: 'var(--background-primary)',
 		border: '1px solid var(--divider-color)',
 		borderRadius: '4px',
