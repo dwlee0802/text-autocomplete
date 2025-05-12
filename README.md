@@ -1,16 +1,31 @@
-# Obsidian Sample Plugin
+# Text Autocomplete
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+This is a text autocomplete plugin for obsidian.
 
 This project uses TypeScript to provide type checking and documentation.
 The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
+## Functionality
+
+This plugin has the following base functionalities:
+- Up to three word dropdown list of suggested words of the currently typed substring
+- Default TAB key capability for completing the currently typed substring with the first word suggestion
+- Default arrow key capability for navigating suggested words dropdown list
+
+Importantly, the plugin only has english language support right now and is only responsive in non-LaTex and non-code block text. Future functionalities to consider adding support for include:
+- Support for other languages
+- Bilingual support (autocomplete for multiple specified languages in the same note)
+- Adding words to the plugin dictionary
+- LaTex support
+- Code block support
+- Contextually predictive word suggestions
+
+<!-- This sample plugin demonstrates some of the basic functionality the plugin API can do.
 - Adds a ribbon icon, which shows a Notice when clicked.
 - Adds a command "Open Sample Modal" which opens a Modal.
 - Adds a plugin setting tab to the settings page.
 - Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+- Registers a global interval which logs 'setInterval' to the console. -->
 
 ## First time developing plugins?
 

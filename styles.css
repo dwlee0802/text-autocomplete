@@ -1,8 +1,14 @@
-/*
+.autocomplete-dropdown {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
+    font-size: var(--font-size-normal);
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.autocomplete-dropdown li {
+    padding: 4px 8px;
+    cursor: pointer;
+}
 
-If your plugin does not need CSS, delete this file.
-
-*/
+.autocomplete-dropdown li.active, 
+.autocomplete-dropdown li:hover {
+    background-color: var(--background-modifier-hover);
+}
