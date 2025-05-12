@@ -91,7 +91,23 @@ export class TASettingsTab extends PluginSettingTab {
 
         // Manage custom dictionary subsetting
         if (this.plugin.settings.customDict.length > 0) {
-            containerEl.createEl('h3', { text: 'Custom Dictionary Contents' });
+            // containerEl.createEl('h3', { text: 'Custom Dictionary Contents' });
+            const scrollContainer = containerEl.createDiv({ cls: 'custom-word-scroll' });
+            
+            this.plugin.settings.customDict.forEach((word, index) => {
+                const row = new Setting(scrollContainer)
+                    .setDesc(word)
+                    .addButton(b =>
+                        b.setButtonText('Remove')
+                            .setTooltip(`Remove "${word}" from your custom dictionary`)
+                            .onClick(async () => {
+                                this.plugin.settings.customDict.splice(index, 1);
+                                this.plugin.wordTrie.remove(word);
+                                await this.plugin.saveSettings();
+                                // new Notice(`Removed "${word}" from your custom dictionary.`)
+                                this.display();
+                            }))
+            })
         }
 
         // Clear custom dictionary setting
