@@ -2,8 +2,8 @@
 	"id": "text-autocomplete",
 	"name": "Text Autocomplete",
 	"version": "1.0.0",
-	"minAppVersion": "0.15.0",
-	"description": "Provides autocomplete for english non-code block text.",
+	"minAppVersion": "1.8.10",
+	"description": "Autocomplete text to type more efficiently.",
 	"author": "Christ Degni",
 	"isDesktopOnly": false,
 	"css": "styles.css"

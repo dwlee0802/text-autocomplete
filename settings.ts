@@ -1,4 +1,4 @@
-import { PluginSettingTab, App, Setting, Notice } from "obsidian";
+import { PluginSettingTab, App, Setting, Notice } from 'obsidian';
 import type TAPlugin from './main'
 
 // TODO Add LaTex support
@@ -58,8 +58,8 @@ export class TASettingsTab extends PluginSettingTab {
 
         // Max suggestions setting
         new Setting(containerEl)
-            .setName('Max Suggestions')
-            .setDesc('Max number of suggestions shown at once (3-10).')
+            .setName('Maximum suggestions')
+            .setDesc('Maximum number of suggestions shown at once (3-10).')
             .addSlider(slider =>
                 slider.setLimits(3, 10, 1)
                     .setValue(this.plugin.settings.maxSuggestions)
@@ -71,7 +71,7 @@ export class TASettingsTab extends PluginSettingTab {
 
         // Custom dictionary setting
         new Setting(containerEl)
-            .setName('Custom Dictionary')
+            .setName('Custom dictionary')
             .setDesc('Add words to a your own custom dictionary.')
             .addText(text => {
                 text.setPlaceholder('e.g. tiktok');
@@ -119,7 +119,7 @@ export class TASettingsTab extends PluginSettingTab {
 
         // Clear custom dictionary setting
         new Setting(containerEl)
-            .setName('Clear Custom Dictionary')
+            .setName('Clear custom dictionary')
             .setDesc('Remove all words from your custom dictionary.')
             .addButton(b =>
                 b.setButtonText('Reset')

@@ -1,10 +1,41 @@
-import { EditorView, ViewPlugin, ViewUpdate } from '@codemirror/view';
+import { EditorView, ViewPlugin, ViewUpdate, PluginValue } from '@codemirror/view';
 import { App, Editor, View } from 'obsidian';
 
 let dropdownEl: HTMLUListElement | null = null;
 
 export function createTAUI(plugin: any) {
-    return [];
+    return [
+        ViewPlugin.fromClass(
+            class implements PluginValue {
+
+                update(update: ViewUpdate) {
+                    if (!update.selectionSet && !update.docChanged && !update.focusChanged) return;
+
+                    const cursor = update.state.selection.main.head;
+                    const doc = update.state.doc;
+                    if (!cursor) return;
+                    const lineStart = doc.lineAt(cursor).from;
+                    const line = doc.lineAt(cursor).text;
+                    const beforeCursor = line.substring(0, cursor - lineStart); // Current line up to cursor
+		            const afterCursor = line.substring(cursor - lineStart);
+                    
+                    // Destroy dropdown if cursor is in a word or before punctation
+                    if (/^[\w.,;:!?'"()\[\]{}\-_+=<>@#$%^&*]/.test(afterCursor)) {
+                        destroyTAUI();
+                        return;
+                    }
+
+                    const match = beforeCursor.match(/(\b[\w']+)$/); // Match contains word at the end of string
+                    // No matches (word at the end of the string) 
+                    if (!match) {
+                        destroyTAUI();
+                        
+                    }
+                }
+            }
+        )
+    ];
+    // return [];
 }
 
 export function destroyTAUI() {
