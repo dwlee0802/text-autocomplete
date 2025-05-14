@@ -1,5 +1,3 @@
-import { DEFAULT_TRIE } from "dictionary";
-
 class TrieNode {
     children: Record<string, TrieNode>;
     endOfWord: boolean;

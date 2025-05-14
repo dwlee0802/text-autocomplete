@@ -1,4 +1,4 @@
-import { App, Editor, EditorPosition, MarkdownView, Plugin, Menu, Notice } from 'obsidian';
+import { Editor, EditorPosition, MarkdownView, Plugin, Menu, Notice } from 'obsidian';
 import { TASettingsTab, DEFAULT_SETTINGS, TASettings } from './settings';
 import { createTAUI, destroyTAUI, updateSuggestions } from './ui';
 import { DEFAULT_TRIE } from './dictionary';
@@ -37,7 +37,7 @@ export default class TAPlugin extends Plugin {
 		this.registerEvent(this.app.workspace.on('editor-change', this.handleEditorChange.bind(this)));
 		this.registerEvent(this.app.workspace.on('editor-menu', this.handleContextMenu.bind(this)));
 		this.registerDomEvent(document, 'keydown', this.handleKeyDown.bind(this), { capture: true });
-		this.registerEditorExtension(createTAUI(this));
+		this.registerEditorExtension(createTAUI());
 	}
 
 	// Cleanup

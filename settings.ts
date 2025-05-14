@@ -8,7 +8,6 @@ export interface TASettings {
     language: string; // Language support
     maxSuggestions: number; // Max number of proposed suggestions at a time
     customDict: string[];
-    // initialBoot: boolean; // Initial install bootup flag
     // latex: boolean; // LaTeX support
 }
 
@@ -17,7 +16,6 @@ export const DEFAULT_SETTINGS : TASettings = {
     language: 'English',
     maxSuggestions: 3,
     customDict: [],
-    // initialBoot: false,
     // latex: false,
 }
 

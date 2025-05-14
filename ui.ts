@@ -1,9 +1,9 @@
-import { EditorView, ViewPlugin, ViewUpdate, PluginValue } from '@codemirror/view';
-import { App, Editor, View } from 'obsidian';
+import { ViewPlugin, ViewUpdate, PluginValue } from '@codemirror/view';
+import { Editor } from 'obsidian';
 
 let dropdownEl: HTMLUListElement | null = null;
 
-export function createTAUI(plugin: any) {
+export function createTAUI() {
     return [
         ViewPlugin.fromClass(
             class implements PluginValue {

@@ -10,7 +10,7 @@ Utilize text autocomplete to type more efficiently.
   - Selecting the highlighted suggestion with the `enter`/`tab` keys 
 - Navigate dropdown suggestions with the `up/down arrow` keys
 - Hide the dropdown with the `esc` key at which point all keys have their default functionalities
-- Also, use the default `enter` functionality by additionally holding the `shift` key: `shift + enter`
+- Also, to use the default `enter` key functionality, additionally hold the `shift` key: `shift + enter`
 
 ### Custom dictionary
 
@@ -30,3 +30,5 @@ The custom dictionary is a list of words you curate that is added to the plugin'
 - The plugin can be disabled from the plugin settings
 - English is the only supported language at the moment
 - For the time being, all features are disabled within code blocks (typing within code blocks is not supported)
+
+#### Thank you to everyone using the plugin!
