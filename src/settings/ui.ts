@@ -7,6 +7,7 @@ export function createTAUI() {
     return [
         ViewPlugin.fromClass(
             class implements PluginValue {
+                lastCursor: number | null;
 
                 update(update: ViewUpdate) {
                     if (!update.selectionSet && !update.docChanged && !update.focusChanged) return;
@@ -22,6 +23,7 @@ export function createTAUI() {
                     // Destroy dropdown if cursor is in a word or before punctation
                     if (/^[\w.,;:!?'"()\[\]{}\-_+=<>@#$%^&*]/.test(afterCursor)) {
                         destroyTAUI();
+                        this.lastCursor = cursor;
                         return;
                     }
 
@@ -29,13 +31,21 @@ export function createTAUI() {
                     // No matches (word at the end of the string) 
                     if (!match) {
                         destroyTAUI();
-                        
+                        this.lastCursor = cursor;
+                        return;
                     }
+
+                    if (!this.lastCursor) return;
+                    const typing: boolean = this.lastCursor === cursor + 1 || this.lastCursor === cursor - 1;
+
+                    if (!typing) {
+                        destroyTAUI();
+                    }
+                    this.lastCursor = cursor;
                 }
             }
         )
     ];
-    // return [];
 }
 
 export function destroyTAUI() {
@@ -57,7 +67,7 @@ export function updateSuggestions(suggestions: string[], editor: Editor, baseWor
     suggestions.forEach(suggestion => {
         const li = document.createElement('li');
         li.textContent = suggestion;
-        li.onclick = () => {
+        li.addEventListener('mousedown', () => {
             const cursor = editor.getCursor();
             const line = editor.getLine(cursor.line);
             const beforeCursor = line.substring(0, cursor.ch);
@@ -70,7 +80,7 @@ export function updateSuggestions(suggestions: string[], editor: Editor, baseWor
                 );
             }
             destroyTAUI();
-        };
+        });
         dropdownEl?.appendChild(li);
     });
 

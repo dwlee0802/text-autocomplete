@@ -1,5 +1,5 @@
 import { PluginSettingTab, App, Setting, Notice } from 'obsidian';
-import type TAPlugin from './main'
+import type TAPlugin from 'src/main';
 
 // TODO Add LaTex support
 
@@ -99,7 +99,7 @@ export class TASettingsTab extends PluginSettingTab {
                 }, 1000);
             });
             
-            this.plugin.settings.customDict.forEach((word, index) => {
+            this.plugin.settings.customDict.forEach((word: string, index: number) => {
                 const row = new Setting(scrollContainer)
                     .setDesc(word)
                     .addButton(b =>
@@ -123,7 +123,7 @@ export class TASettingsTab extends PluginSettingTab {
                 b.setButtonText('Reset')
                     .setCta()
                     .onClick(async () => {
-                        this.plugin.settings.customDict.forEach(word => this.plugin.wordTrie.remove(word));
+                        this.plugin.settings.customDict.forEach((word: string) => this.plugin.wordTrie.remove(word));
                         this.plugin.settings.customDict = [];
                         await this.plugin.saveSettings();
                         // new Notice('Custom dictionary cleared.')

@@ -23,7 +23,6 @@ The custom dictionary is a list of words you curate that is added to the plugin'
 - Words can be individually removed from the custom dictionary only from within the plugin settings
 - The custom dictionary can be reset in the plugin settings as well
 
-
 ## Additional
 
 - The maximum number of suggestions is modifiable in the plugin settings (3-10)
@@ -31,4 +30,4 @@ The custom dictionary is a list of words you curate that is added to the plugin'
 - English is the only supported language at the moment
 - For the time being, all features are disabled within code blocks (typing within code blocks is not supported)
 
-#### Thank you to everyone using the plugin!
+#### Thanks to everyone using the plugin!

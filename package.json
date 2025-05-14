@@ -1,7 +1,7 @@
 {
 	"name": "text-autocomplete",
 	"version": "1.0.0",
-	"description": "This is a text autocomplete plugin for Obsidian.",
+	"description": "Autocomplete text to type more efficiently.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",

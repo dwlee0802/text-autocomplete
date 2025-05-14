@@ -11,6 +11,9 @@
     "importHelpers": true,
     "isolatedModules": true,
     "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "lib": [
       "DOM",
       "ES5",

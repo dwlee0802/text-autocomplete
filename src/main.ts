@@ -1,8 +1,8 @@
 import { Editor, EditorPosition, MarkdownView, Plugin, Menu, Notice } from 'obsidian';
-import { TASettingsTab, DEFAULT_SETTINGS, TASettings } from './settings';
-import { createTAUI, destroyTAUI, updateSuggestions } from './ui';
-import { DEFAULT_TRIE } from './dictionary';
-import { Trie } from './trie';
+import { TASettingsTab, DEFAULT_SETTINGS, TASettings } from './settings/settings';
+import { createTAUI, destroyTAUI, updateSuggestions } from './settings/ui';
+import { DEFAULT_TRIE } from './dictionary/dictionary';
+import { Trie } from './dictionary/trie';
 
 // Helper functions
 function inCodeBlock(editor: Editor, cursor: EditorPosition): boolean {
@@ -128,7 +128,7 @@ export default class TAPlugin extends Plugin {
 	}
 
 	// Handles plugin interaction from the context menu
-	handleContextMenu(menu: Menu, editor: Editor, view: MarkdownView) {
+	handleContextMenu(menu: Menu, editor: Editor) {
 		const selectedText = editor.getSelection()?.trim();
 		if (selectedText && /^.*$/.test(selectedText)) {
 			menu.addItem(item => 
@@ -171,7 +171,7 @@ export default class TAPlugin extends Plugin {
 
 			if (evt.key === 'Enter' || evt.key === 'Tab') {
 				const selected = active || items[0]; // Defaults to first suggestion
-				if (selected) selected.dispatchEvent(new Event('click'));
+				if (selected) selected.dispatchEvent(new Event('mousedown'));
 				destroyTAUI();
 				return;
 			}
