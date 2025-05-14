@@ -7,10 +7,10 @@ Utilize text autocomplete to type more efficiently.
 - A dropdown of suggested words of the currently typed word
 - Replace the currently typed word with a suggestion from the dropdown by:
   - Selecting a suggestion with your cursor
-  - Selecting the highlighted suggestion with `enter`/`tab` 
-- Navigate dropdown suggestions with the `up/down arrows`
-- Hide the dropdown with `escape` at which point all keys have their default functionalities
-- Also, use the default `enter` functionality by additionally holding shift: `shift + enter`
+  - Selecting the highlighted suggestion with the `enter`/`tab` keys 
+- Navigate dropdown suggestions with the `up/down arrow` keys
+- Hide the dropdown with the `esc` key at which point all keys have their default functionalities
+- Also, use the default `enter` functionality by additionally holding the `shift` key: `shift + enter`
 
 ### Custom dictionary
 
