@@ -72,7 +72,7 @@ export class TASettingsTab extends PluginSettingTab {
         // Custom dictionary setting
         new Setting(containerEl)
             .setName('Custom dictionary')
-            .setDesc('Add words to a your own custom dictionary.')
+            .setDesc('Add words to a your custom dictionary.')
             .addText(text => {
                 text.setPlaceholder('e.g. tiktok');
                 text.inputEl.addEventListener('keydown', async (e) => {

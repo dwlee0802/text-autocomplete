@@ -5,6 +5,7 @@
 	"minAppVersion": "1.8.10",
 	"description": "Autocomplete text to type more efficiently.",
 	"author": "Christ Degni",
-	"isDesktopOnly": false,
-	"css": "styles.css"
+	"isDesktopOnly": true,
+	"css": "styles.css",
+	"fundingUrl": "https://buymeacoffee.com/c.degni"
 }
