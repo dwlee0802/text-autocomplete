@@ -53,7 +53,7 @@ export function destroyTAUI() {
     dropdownEl = null;
 }
 
-export function updateSuggestions(suggestions: string[], editor: Editor, baseWord: string) {
+export function updateSuggestions(suggestions: string[], editor: Editor) {
     destroyTAUI();
 
     const cm = (editor as any).cm;

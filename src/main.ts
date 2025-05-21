@@ -121,7 +121,7 @@ export default class TAPlugin extends Plugin {
 			.filter((w: string) => w !== word);
 
 		if (suggestions.length > 0) {
-			updateSuggestions(suggestions, editor, match[1]);
+			updateSuggestions(suggestions, editor);
 		} else {
 			destroyTAUI(); // Should never happen but is a safety check
 		}
