@@ -1,6 +1,6 @@
 {
 	"name": "text-autocomplete",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Autocomplete text to type more efficiently.",
 	"main": "main.js",
 	"scripts": {
