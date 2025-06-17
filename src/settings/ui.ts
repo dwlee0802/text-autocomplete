@@ -1,7 +1,20 @@
 import { ViewPlugin, ViewUpdate, PluginValue } from '@codemirror/view';
-import { Editor } from 'obsidian';
+import { Editor, EditorRange } from 'obsidian';
 
 let dropdownEl: HTMLUListElement | null = null;
+
+interface CodeMirrorEditor extends Editor {
+    cm: {
+        state: {
+            selection: {
+                main: {
+                    head: number;
+                };
+            };
+        };
+        coordsAtPos: (pos: number) => { left: number; top: number; bottom: number} | null;
+    };
+}
 
 export function createTAUI() {
     return [
@@ -56,16 +69,16 @@ export function destroyTAUI() {
 export function updateSuggestions(suggestions: string[], editor: Editor) {
     destroyTAUI();
 
-    const cm = (editor as any).cm;
+    const cm = (editor as CodeMirrorEditor).cm;
     const pos = cm.state.selection.main.head;
     const coords = cm.coordsAtPos(pos);
     if (!coords) return;
 
-    dropdownEl = document.createElement('ul');
+    dropdownEl = createEl('ul');
     dropdownEl.className = 'autocomplete-dropdown';
 
     suggestions.forEach(suggestion => {
-        const li = document.createElement('li');
+        const li = createEl('li');
         li.textContent = suggestion;
         li.addEventListener('mousedown', () => {
             const cursor = editor.getCursor();
@@ -86,18 +99,18 @@ export function updateSuggestions(suggestions: string[], editor: Editor) {
 
     (dropdownEl.firstChild as HTMLLIElement)?.classList.add('active'); // First suggestion will by default be tagged as active
 
-    Object.assign(dropdownEl.style, {
+    dropdownEl.setCssStyles({
         position: 'absolute',
         top: `${coords.bottom + window.scrollY}px`,
         left: `${coords.left + window.scrollX}px`,
-        zIndex: 50,
+        zIndex: '50',
         backgroundColor: 'var(--background-primary)',
-		border: '1px solid var(--divider-color)',
-		borderRadius: '4px',
-		padding: '4px 0',
-		listStyle: 'none',
-		margin: 0,
-		width: '200px',
+        border: '1px solid var(--divider-color)',
+        borderRadius: '4px',
+        padding: '4px 0',
+        listStyle: 'none',
+        margin: '0',
+        width: '200px',
     });
 
     document.body.appendChild(dropdownEl);

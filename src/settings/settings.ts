@@ -89,12 +89,14 @@ export class TASettingsTab extends PluginSettingTab {
 
         // Manage custom dictionary subsetting
         if (this.plugin.settings.customDict.length > 0) {
-            const scrollContainer = containerEl.createDiv({ cls: 'custom-word-scroll' });
+            const scrollContainer = containerEl.createDiv({ cls: 'custom-word-scroll' }) as HTMLDivElement & {
+                scrollTimeout?: number;
+            };
 
             scrollContainer.addEventListener('scroll', () => {
                 scrollContainer.classList.add('show');
-                clearTimeout((scrollContainer as any).scrollTimeout);
-                (scrollContainer as any).scrollTimeout = setTimeout(() => {
+                window.clearTimeout(scrollContainer.scrollTimeout);
+                scrollContainer.scrollTimeout = window.setTimeout(() => {
                     scrollContainer.classList.remove('show');
                 }, 1000);
             });
