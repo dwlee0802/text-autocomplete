@@ -1,5 +1,6 @@
 import { PluginSettingTab, App, Setting, Notice } from 'obsidian';
 import type TAPlugin from 'src/main';
+import { destroyTAUI } from './ui';
 
 // TODO Add LaTex support
 
@@ -39,6 +40,7 @@ export class TASettingsTab extends PluginSettingTab {
                 toggle.setValue(this.plugin.settings.enabled)
                     .onChange(async val => {
                         this.plugin.settings.enabled = val;
+                        if (!val) destroyTAUI;
                         await this.plugin.saveSettings();
                     }));
 
