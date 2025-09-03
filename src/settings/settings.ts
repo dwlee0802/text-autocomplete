@@ -72,8 +72,8 @@ export class TASettingsTab extends PluginSettingTab {
                     }));
 
         new Setting(containerEl)
-            .setName('Add space after Autocomplete')
-            .setDesc('Enable/disable adding space at the end of the autocompleted word.')
+            .setName('Space terminator after autocomplete')
+            .setDesc('Enable/disable adding space terminator to autocompleted words.')
             .addToggle(toggle =>
                 toggle.setValue(this.plugin.settings.addSpace)
                     .onChange(async val => {
