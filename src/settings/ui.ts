@@ -87,9 +87,7 @@ export function updateSuggestions(suggestions: string[], editor: Editor, setting
             const beforeCursor = line.substring(0, cursor.ch);
             const match = beforeCursor.match(/(\b[\w']+)$/);
             if (match) {
-                if (settings.addSpace) {
-                    suggestion += " ";
-                }
+                if (settings.addSpace) suggestion += " ";
                 editor.replaceRange(
                     suggestion,
                     { line: cursor.line, ch: cursor.ch - match[1].length }, // start position (line, position in line)

@@ -6,18 +6,18 @@ import { destroyTAUI } from './ui';
 
 export interface TASettings {
     enabled: boolean; // Autocomplete enabling
-    addSpace: boolean; // Add Space enabling
     language: string; // Language support
     maxSuggestions: number; // Max number of proposed suggestions at a time
+    addSpace: boolean; // Add space enabling
     customDict: string[];
     // latex: boolean; // LaTeX support
 }
 
 export const DEFAULT_SETTINGS: TASettings = {
     enabled: true,
-    addSpace: false,
     language: 'English',
     maxSuggestions: 3,
+    addSpace: false,
     customDict: [],
     // latex: false,
 }
@@ -46,18 +46,6 @@ export class TASettingsTab extends PluginSettingTab {
                         await this.plugin.saveSettings();
                     }));
 
-        // Add space setting
-        new Setting(containerEl)
-            .setName('Add space after Autocomplete')
-            .setDesc('Enable/disable adding space at the end of the autocompleted word.')
-            .addToggle(toggle =>
-                toggle.setValue(this.plugin.settings.addSpace)
-                    .onChange(async val => {
-                        this.plugin.settings.addSpace = val;
-                        if (!val) destroyTAUI;
-                        await this.plugin.saveSettings();
-                    }));
-
         // Language setting
         new Setting(containerEl)
             .setName('Language')
@@ -80,6 +68,17 @@ export class TASettingsTab extends PluginSettingTab {
                     .setDynamicTooltip()
                     .onChange(async (val: number) => {
                         this.plugin.settings.maxSuggestions = val;
+                        await this.plugin.saveSettings();
+                    }));
+
+        new Setting(containerEl)
+            .setName('Add space after Autocomplete')
+            .setDesc('Enable/disable adding space at the end of the autocompleted word.')
+            .addToggle(toggle =>
+                toggle.setValue(this.plugin.settings.addSpace)
+                    .onChange(async val => {
+                        this.plugin.settings.addSpace = val;
+                        if (!val) destroyTAUI;
                         await this.plugin.saveSettings();
                     }));
 
