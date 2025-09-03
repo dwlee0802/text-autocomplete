@@ -3,6 +3,7 @@ import { TASettingsTab, DEFAULT_SETTINGS, TASettings } from './settings/settings
 import { createTAUI, destroyTAUI, updateSuggestions } from './settings/ui';
 import { DEFAULT_TRIE } from './dictionary/dictionary';
 import { Trie } from './dictionary/trie';
+import { CS_WORDS, DEFAULT_WORDS } from './dictionary/words';
 
 // Helper functions
 function inCodeBlock(editor: Editor, cursor: EditorPosition): boolean {
@@ -51,7 +52,11 @@ export default class TAPlugin extends Plugin {
 	}
 
 	async loadWordTrie() {
-		this.wordTrie = DEFAULT_TRIE;
+		this.wordTrie = new Trie();
+		if (!this.settings.onlyCustom) {
+			DEFAULT_WORDS.forEach(word => this.wordTrie.insert(word));
+			CS_WORDS.forEach(word => this.wordTrie.insert(word));
+		}
 		this.settings.customDict.forEach(word => this.wordTrie.insert(word));
 	}
 

@@ -9,6 +9,7 @@ export interface TASettings {
     language: string; // Language support
     maxSuggestions: number; // Max number of proposed suggestions at a time
     addSpace: boolean; // Add space enabling
+    onlyCustom: boolean; // Only use words in custom dictionary
     customDict: string[];
     // latex: boolean; // LaTeX support
 }
@@ -18,6 +19,7 @@ export const DEFAULT_SETTINGS: TASettings = {
     language: 'English',
     maxSuggestions: 3,
     addSpace: false,
+    onlyCustom: false,
     customDict: [],
     // latex: false,
 }
@@ -79,6 +81,19 @@ export class TASettingsTab extends PluginSettingTab {
                     .onChange(async val => {
                         this.plugin.settings.addSpace = val;
                         if (!val) destroyTAUI;
+                        await this.plugin.saveSettings();
+                    }));
+
+        // Only custom dictionary setting
+        new Setting(containerEl)
+            .setName('Only use custom dictionary')
+            .setDesc('Enable/disable using words only from custom dictionary')
+            .addToggle(toggle =>
+                toggle.setValue(this.plugin.settings.onlyCustom)
+                    .onChange(async val => {
+                        this.plugin.settings.onlyCustom = val;
+                        if (!val) destroyTAUI;
+                        await this.plugin.loadWordTrie();
                         await this.plugin.saveSettings();
                     }));
 
