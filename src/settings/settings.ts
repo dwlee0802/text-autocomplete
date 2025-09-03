@@ -6,14 +6,16 @@ import { destroyTAUI } from './ui';
 
 export interface TASettings {
     enabled: boolean; // Autocomplete enabling
+    addSpace: boolean; // Add Space enabling
     language: string; // Language support
     maxSuggestions: number; // Max number of proposed suggestions at a time
     customDict: string[];
     // latex: boolean; // LaTeX support
 }
 
-export const DEFAULT_SETTINGS : TASettings = {
+export const DEFAULT_SETTINGS: TASettings = {
     enabled: true,
+    addSpace: false,
     language: 'English',
     maxSuggestions: 3,
     customDict: [],
@@ -40,6 +42,18 @@ export class TASettingsTab extends PluginSettingTab {
                 toggle.setValue(this.plugin.settings.enabled)
                     .onChange(async val => {
                         this.plugin.settings.enabled = val;
+                        if (!val) destroyTAUI;
+                        await this.plugin.saveSettings();
+                    }));
+
+        // Add space setting
+        new Setting(containerEl)
+            .setName('Add space after Autocomplete')
+            .setDesc('Enable/disable adding space at the end of the autocompleted word.')
+            .addToggle(toggle =>
+                toggle.setValue(this.plugin.settings.addSpace)
+                    .onChange(async val => {
+                        this.plugin.settings.addSpace = val;
                         if (!val) destroyTAUI;
                         await this.plugin.saveSettings();
                     }));
@@ -102,7 +116,7 @@ export class TASettingsTab extends PluginSettingTab {
                     scrollContainer.classList.remove('show');
                 }, 1000);
             });
-            
+
             this.plugin.settings.customDict.forEach((word: string, index: number) => {
                 const row = new Setting(scrollContainer)
                     .setDesc(word)
